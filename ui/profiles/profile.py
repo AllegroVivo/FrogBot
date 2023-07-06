@@ -30,7 +30,7 @@ class ProfileChannelSelect(Select):
         super().__init__(
             placeholder="Select Your Posting Channel...",
             options=options,
-            disabled=True if len(options) == 0 else False
+            disabled=not options,
         )
 
     async def callback(self, interaction: Interaction):
@@ -65,15 +65,9 @@ class ProfileChannelSelectorView(FrogView):
 
         super().__init__(owner, close_on_complete=True)
 
-        options = []
-        for ch in channels:
-            options.append(
-                SelectOption(
-                    label=ch.name,
-                    value=str(ch.id)
-                )
-            )
-
+        options = [
+            SelectOption(label=ch.name, value=str(ch.id)) for ch in channels
+        ]
         self.add_item(ProfileChannelSelect(options))
         self.add_item(CancelButton())
 

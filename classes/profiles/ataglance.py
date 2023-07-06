@@ -126,11 +126,7 @@ class ProfileAtAGlance(ProfileSection):
     @pronouns.setter
     def pronouns(self, value: Optional[List[Pronoun]]) -> None:
 
-        if value is None:
-            self._pronouns = []
-        else:
-            self._pronouns = value
-
+        self._pronouns = [] if value is None else value
         self.update()
 
 ################################################################################
@@ -251,7 +247,7 @@ class ProfileAtAGlance(ProfileSection):
             return self.height
 
         inches = int(self._height / 2.54)
-        feet = int(inches / 12)
+        feet = inches // 12
         leftover = int(inches % 12)
 
         return f"{feet}' {leftover}\" (~{self.height} cm.)"
@@ -259,10 +255,7 @@ class ProfileAtAGlance(ProfileSection):
 ################################################################################
     def compile_height(self) -> str:
 
-        if self.height is NS:
-            return ""
-
-        return f"__Height:__ {self.formatted_height}\n"
+        return "" if self.height is NS else f"__Height:__ {self.formatted_height}\n"
 
 ################################################################################
     @property
@@ -285,19 +278,13 @@ class ProfileAtAGlance(ProfileSection):
 ################################################################################
     def compile_age(self) -> str:
 
-        if self.age is NS:
-            return ""
-
-        return f"__Age:__ {self.age}\n"
+        return "" if self.age is NS else f"__Age:__ {self.age}\n"
 
 ################################################################################
     @property
     def mare(self) -> Optional[str]:
 
-        if self._mare is None:
-            return NS
-
-        return self._mare
+        return NS if self._mare is None else self._mare
 
 ################################################################################
     @mare.setter
@@ -309,10 +296,7 @@ class ProfileAtAGlance(ProfileSection):
 ################################################################################
     def compile_mare(self) -> str:
 
-        if self.mare is NS:
-            return ""
-
-        return f"__Friend ID:__ {self.mare}\n"
+        return "" if self.mare is NS else f"__Friend ID:__ {self.mare}\n"
 
 ################################################################################
     def status(self) -> Embed:
@@ -337,9 +321,7 @@ class ProfileAtAGlance(ProfileSection):
         if isinstance(self._gender, str):
             gp_combined += "\n*(Custom Value)*"
 
-        orientation_val = str(NS)
-        if self.orientation is not NS:
-            orientation_val = self.orientation
+        orientation_val = self.orientation if self.orientation is not NS else str(NS)
         if isinstance(self._orientation, str):
             orientation_val += "\n*(Custom Value)*"
 

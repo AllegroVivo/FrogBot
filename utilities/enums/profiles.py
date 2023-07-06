@@ -26,10 +26,7 @@ class Gender(FrogEnum):
     @property
     def proper_name(self) -> str:
 
-        if self.value == 3:
-            return "Non-Binary"
-
-        return self.name
+        return "Non-Binary" if self.value == 3 else self.name
 
 ################################################################################
     @staticmethod

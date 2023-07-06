@@ -70,10 +70,7 @@ class AdditionalImage:
 ################################################################################
     def compile(self) -> str:
 
-        if self.caption is NS:
-            return self.url
-
-        return f"[{self.caption}]({self.url})"
+        return self.url if self.caption is NS else f"[{self.caption}]({self.url})"
 
 ################################################################################
     @property
@@ -196,10 +193,7 @@ class ProfileImages(ProfileSection):
 ################################################################################
     def create_pages(self, interaction: Interaction) -> List[Page]:
 
-        pages: List[Page] = []
-        for img in self.additional:
-            pages.append(img.page(interaction, self))
-
+        pages: List[Page] = [img.page(interaction, self) for img in self.additional]
         if not pages:
             pages.append(
                 Page(
@@ -222,10 +216,7 @@ class ProfileImages(ProfileSection):
         if not self.additional:
             return
 
-        images_text = ""
-        for image in self.additional:
-            images_text += f"{image.compile()}\n"
-
+        images_text = "".join(f"{image.compile()}\n" for image in self.additional)
         return EmbedField(
             name=f"{BotEmojis.Camera.value} __Additional Images__ {BotEmojis.Camera.value}",
             value=images_text,

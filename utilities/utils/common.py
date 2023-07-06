@@ -8,8 +8,6 @@ from discord import Colour, Embed, EmbedField
 from discord.embeds import EmptyEmbed
 from typing         import TYPE_CHECKING, Any, List, Optional, Tuple, Union
 
-if TYPE_CHECKING:
-    pass
 ################################################################################
 
 __all__ = (

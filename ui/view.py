@@ -4,8 +4,6 @@ from discord    import Interaction, Member, User
 from discord.ui import View
 from typing     import TYPE_CHECKING, Any, Optional, Union
 
-if TYPE_CHECKING:
-    pass
 ################################################################################
 
 __all__ = (

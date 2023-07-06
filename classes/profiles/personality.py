@@ -62,40 +62,26 @@ class ProfilePersonality(ProfileSection):
     @property
     def likes(self) -> str:
 
-        if not self._likes:
-            return NS
-
-        return "- " + "\n- ".join(self._likes)
+        return NS if not self._likes else "- " + "\n- ".join(self._likes)
 
 ################################################################################
     @likes.setter
     def likes(self, value: Optional[List[str]]) -> None:
 
-        if not value:
-            self._likes = []
-        else:
-            self._likes = value
-
+        self._likes = [] if not value else value
         self.update()
 
 ################################################################################
     @property
     def dislikes(self) -> str:
 
-        if not self._dislikes:
-            return NS
-
-        return "- " + "\n- ".join(self._dislikes)
+        return NS if not self._dislikes else "- " + "\n- ".join(self._dislikes)
 
 ################################################################################
     @dislikes.setter
     def dislikes(self, value: Optional[List[str]]) -> None:
 
-        if not value:
-            self._dislikes = []
-        else:
-            self._dislikes = value
-
+        self._dislikes = [] if not value else value
         self.update()
 
 ################################################################################
