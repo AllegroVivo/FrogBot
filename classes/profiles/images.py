@@ -186,7 +186,7 @@ class ProfileImages(ProfileSection):
 
         if not self.additional:
             return EmbedField(
-                name="__Addtional Images__",
+                name="__Additional Images__",
                 value=str(NS),
                 inline=False
             )
