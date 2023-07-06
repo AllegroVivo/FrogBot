@@ -33,11 +33,7 @@ __all__ = (
 class RemoveThumbnailButton(ProfileSectionButton):
 
     def __init__(self, thumbnail: Optional[str]):
-        super().__init__(
-            label="Remove Thumbnail",
-            disabled=True if not thumbnail else False,
-            row=0
-        )
+        super().__init__(label="Remove Thumbnail", disabled=not thumbnail, row=0)
 
         self.set_style(thumbnail)
 
@@ -58,11 +54,7 @@ class RemoveThumbnailButton(ProfileSectionButton):
 class RemoveMainImageButton(ProfileSectionButton):
 
     def __init__(self, image: Optional[str]):
-        super().__init__(
-            label="Remove Main Image",
-            disabled=True if not image else False,
-            row=0
-        )
+        super().__init__(label="Remove Main Image", disabled=not image, row=0)
 
         self.set_style(image)
 
@@ -83,11 +75,7 @@ class RemoveMainImageButton(ProfileSectionButton):
 class PaginateAdditionalImagesButton(ProfileSectionButton):
 
     def __init__(self, images: List[AdditionalImage]):
-        super().__init__(
-            label="View Additional Images",
-            disabled=True if not images else False,
-            row=0
-        )
+        super().__init__(label="View Additional Images", disabled=not images, row=0)
 
         self.set_style(images)
 

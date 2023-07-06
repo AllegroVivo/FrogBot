@@ -189,11 +189,7 @@ class ProfileDetails(ProfileSection):
     @color.setter
     def color(self, value: Union[Colour, int]):
 
-        if isinstance(value, Colour):
-            self._color = value
-        else:
-            self._color = Colour(value)
-
+        self._color = value if isinstance(value, Colour) else Colour(value)
         self.update()
 
 ################################################################################

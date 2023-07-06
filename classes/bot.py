@@ -84,12 +84,10 @@ class FrogBot(Bot):
                 additional_images[img[0]] = [img]
 
         if additional_images:
-            for profile_id in additional_images.keys():
+            for profile_id, value in additional_images.items():
                 p = self._get_profile(profile_id)
-                if p is None:
-                    continue
-
-                p.images.additional_images_from_data(additional_images[profile_id])
+                if p is not None:
+                    p.images.additional_images_from_data(value)
 
 ################################################################################
     def _get_profile(self, profile_id: str) -> Optional[Profile]:

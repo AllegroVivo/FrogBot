@@ -67,7 +67,7 @@ class Configuration(Cog):
         )
     ) -> None:
 
-        if not channel.type == ChannelType.text:
+        if channel.type != ChannelType.text:
             error = ChannelTypeError("Text Channel")
             await ctx.respond(embed=error, ephemeral=True)
             return

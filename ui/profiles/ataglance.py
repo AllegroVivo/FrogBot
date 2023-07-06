@@ -564,7 +564,7 @@ class HeightInputModal(FrogModal):
 
         if cur_val is not None:
             inches = int(cur_val / 2.54)
-            feet = int(inches / 12)
+            feet = inches // 12
             leftover = int(inches % 12)
             cur_val = f"{feet}' {leftover}\""
 
@@ -581,23 +581,21 @@ class HeightInputModal(FrogModal):
 
     async def callback(self, interaction: Interaction):
         if self.children[1].value:
-            result = re.match(
+            if result := re.match(
                 r"^(\d+)\s*cm\.?|(\d+)\s*(?:ft\.?|feet|')$|(\d+)\s*(?:in\.?|inches|\"|'')|"
                 r"(\d+)\s*(?:ft\.?|feet|')\s*(\d+)\s*(?:in\.?|inches|\"|'')",
-                self.children[1].value
-            )
-
-            if result:
-                if result.group(1):
-                    self.value = int(result.group(1))
-                elif result.group(2):
-                    cm = int(result.group(2)) * 12 * 2.54
+                self.children[1].value,
+            ):
+                if result[1]:
+                    self.value = int(result[1])
+                elif result[2]:
+                    cm = int(result[2]) * 12 * 2.54
                     self.value = math.ceil(cm)
-                elif result.group(3):
-                    cm = int(result.group(3)) * 2.54
+                elif result[3]:
+                    cm = int(result[3]) * 2.54
                     self.value = math.ceil(cm)
-                elif result.group(4) and result.group(5):
-                    inches = int(result.group(4)) * 12 + int(result.group(5))
+                elif result[4] and result[5]:
+                    inches = int(result[4]) * 12 + int(result[5])
                     self.value = math.ceil(inches * 2.54)
             else:
                 error = HeightInputError(self.children[1].value)

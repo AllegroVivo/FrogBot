@@ -19,8 +19,7 @@ def new_profile_entry(guild_id: int, user_id: int) -> Optional[str]:
         (guild_id, user_id)
     )
 
-    record = c.fetchone()
-    if record:
+    if record := c.fetchone():
         raise ValueError("Profile already exists.")
 
     new_profile_id = uuid.uuid4().hex

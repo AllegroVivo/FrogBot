@@ -7,8 +7,6 @@ from typing             import TYPE_CHECKING, Any, Optional, Union
 
 from .view      import FrogView
 
-if TYPE_CHECKING:
-    pass
 ################################################################################
 
 __all__ = (
@@ -28,10 +26,7 @@ class ProfileSectionButton(Button):
 ################################################################################
     def set_style(self, attribute: Optional[Any]) -> None:
 
-        if attribute:
-            self.style = ButtonStyle.primary
-        else:
-            self.style = ButtonStyle.secondary
+        self.style = ButtonStyle.primary if attribute else ButtonStyle.secondary
 
 ################################################################################
 class FrogModal(Modal):
